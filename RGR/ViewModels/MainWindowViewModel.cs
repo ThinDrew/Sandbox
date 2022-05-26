@@ -17,6 +17,11 @@ namespace RGR.ViewModels
             get => currentView;
         }
 
+        private float minWidth, maxWidth, width;
+        public float MinWidth { get => minWidth; set => this.RaiseAndSetIfChanged(ref minWidth, value); }
+        public float MaxWidth { get => maxWidth; set => this.RaiseAndSetIfChanged(ref maxWidth, value); }
+        public float Width { get => width; set => this.RaiseAndSetIfChanged(ref width, value); }
+
         public TableViewModel mainView
         {
             get;
@@ -27,15 +32,24 @@ namespace RGR.ViewModels
             if (CurrentView is TableViewModel)
             {
                 CurrentView = new RequestManagerViewModel();
+                Width = 600;
+                MinWidth = 600;
+                MaxWidth = 600;
             }
             else if (currentView is RequestManagerViewModel) {
                 CurrentView = new TableViewModel();
+                Width = 800;
+                MinWidth = 450;
+                MaxWidth = 800;
             } 
         }
 
         public MainWindowViewModel()
         {
             CurrentView = mainView = new TableViewModel();
+            Width = 800;
+            MinWidth = 450;
+            MaxWidth = 800;
         }
     }
 }

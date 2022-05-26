@@ -2,26 +2,135 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
              x:Class="RGR.Views.RequestManagerView">
-	<Grid ColumnDefinitions="Auto, *">
-		<Grid RowDefinitions="Auto, *">
-			<Button Margin="10" Content="Add Request"/>
+	<ScrollViewer>
+		<Grid ColumnDefinitions="Auto, *">
+
+			<Grid ColumnDefinitions="*" RowDefinitions="Auto, Auto, *" Margin="10">
+
+				<Button Margin="0, 0, 0, 5" HorizontalAlignment="Stretch" Content="Add Request"/>
+				<Button Grid.Row="1" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Content="Exit" Command="{Binding $parent[Window].DataContext.Change}"/>
+
+			</Grid>
+
+			<Grid Grid.Column="1" ColumnDefinitions="Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+
+				<TextBlock Margin="0, 10, 0, 0" Text="Name"/>
+				<TextBox Grid.Row="1" Width="200" HorizontalAlignment="Left"/>
+
+				<Grid Grid.Row="2" RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="200, 200">
+
+					<TextBlock Text="SELECT" Margin="0, 10, 0, 0"/>
+					<Border Grid.Row="1" BorderThickness="1" BorderBrush="#999999" Height="140" CornerRadius="4">
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<ItemsControl  Items="{Binding Test}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+											<TextBlock Margin="5, 0, 0, 0" VerticalAlignment="Center" Text="{Binding}"/>
+											<CheckBox Grid.Column="1" IsChecked="False"/>
+										</Grid>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</ScrollViewer>
+					</Border>
+
+					<TextBlock Margin="20, 10, 0 ,0" Grid.Column="1" Text="FROM"/>
+					<Border Grid.Row="1" Grid.Column="2"  BorderThickness="1" Margin="20, 0, 0 ,0" BorderBrush="#999999" Width="200" Height="140" CornerRadius="4">
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<ItemsControl  Items="{Binding Test}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+											<TextBlock Margin="5, 0, 0, 0" VerticalAlignment="Center" Text="{Binding}"/>
+											<CheckBox Grid.Column="1" IsChecked="False"/>
+										</Grid>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</ScrollViewer>
+					</Border>
+
+					<TextBlock Text="GROUP BY" Grid.Row="2" Margin="0, 10, 0, 0"/>
+					<Border Grid.Row="3" BorderThickness="1" BorderBrush="#999999" Height="140" CornerRadius="4">
+						<ScrollViewer VerticalScrollBarVisibility="Auto">
+							<ItemsControl  Items="{Binding Test}">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+											<TextBlock Margin="5, 0, 0, 0" VerticalAlignment="Center" Text="{Binding}"/>
+											<CheckBox Grid.Column="1" IsChecked="False"/>
+										</Grid>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</ScrollViewer>
+					</Border>
+
+				</Grid>
+
+				<TextBlock Text="WHERE" Margin="0, 10, 0, 0" Grid.Row="3"/>
+
+				<WrapPanel Grid.Row="4">
+
+					<ComboBox SelectedIndex="0" Width="170" Items="{Binding Test}"/>
+
+					<ComboBox Margin="10, 0, 0, 0" Width="64" HorizontalContentAlignment="Center" SelectedIndex="0">
+						<ComboBoxItem Content=" "/>
+						<ComboBoxItem Content="{Binding Symbols[0]}"/>
+						<ComboBoxItem Content="{Binding Symbols[1]}"/>
+						<ComboBoxItem Content="{Binding Symbols[2]}"/>
+						<ComboBoxItem Content="{Binding Symbols[3]}"/>
+						<ComboBoxItem Content="{Binding Symbols[4]}"/>
+						<ComboBoxItem Content="{Binding Symbols[5]}"/>
+						<ComboBoxItem Content="{Binding Symbols[6]}"/>
+						<ComboBoxItem Content="{Binding Symbols[7]}"/>
+					</ComboBox>
+
+					<TextBox Margin="10, 0, 0, 0" Width="90"/>
+
+					<ComboBox Margin="10, 0, 0, 0" Width="69" HorizontalContentAlignment="Center" SelectedIndex="0">
+						<ComboBoxItem Content=" "/>
+						<ComboBoxItem Content="AND"/>
+						<ComboBoxItem Content="OR"/>
+					</ComboBox>
+
+				</WrapPanel>
+
+				<TextBlock Text="HAVING" Margin="0, 10, 0, 0" Grid.Row="5"/>
+
+				<WrapPanel Grid.Row="6">
+
+					<ComboBox SelectedIndex="0" Width="170" Items="{Binding Test}"/>
+
+					<ComboBox Margin="10, 0, 0, 0" Width="64" HorizontalContentAlignment="Center" SelectedIndex="0">
+						<ComboBoxItem Content=" "/>
+						<ComboBoxItem Content="{Binding Symbols[0]}"/>
+						<ComboBoxItem Content="{Binding Symbols[1]}"/>
+						<ComboBoxItem Content="{Binding Symbols[2]}"/>
+						<ComboBoxItem Content="{Binding Symbols[3]}"/>
+						<ComboBoxItem Content="{Binding Symbols[4]}"/>
+						<ComboBoxItem Content="{Binding Symbols[5]}"/>
+						<ComboBoxItem Content="{Binding Symbols[6]}"/>
+						<ComboBoxItem Content="{Binding Symbols[7]}"/>
+					</ComboBox>
+
+					<TextBox Margin="10, 0, 0, 0" Width="90"/>
+
+					<ComboBox Margin="10, 0, 0, 0" Width="69" HorizontalContentAlignment="Center" SelectedIndex="0">
+						<ComboBoxItem Content=" "/>
+						<ComboBoxItem Content="AND"/>
+						<ComboBoxItem Content="OR"/>
+					</ComboBox>
+
+				</WrapPanel>
+				
+				<Button Grid.Row="7" Margin="0, 10, 0, 0" Content="Execute Request"/>
+
+			</Grid>
+
 		</Grid>
-		<Grid Grid.Column="1" ColumnDefinitions="Auto" RowDefinitions="Auto, Auto, Auto">
-			<TextBlock Margin="0, 10, 0, 0" Text="Name"/>
-			<TextBox Grid.Row="1" Width="200"/>
-			<TextBlock Grid.Row="2" Text="SELECT"/>
-			<ItemsControl>
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto">
-							<TextBlock Text=""/>
-							<CheckBox/>
-						</Grid>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</Grid>
-	</Grid>
+	</ScrollViewer>
 </UserControl>

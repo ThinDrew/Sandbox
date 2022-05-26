@@ -8,7 +8,10 @@
         x:Class="RGR.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="RGR"
-		Content="{Binding CurrentView}">
+		Content="{Binding CurrentView}"
+		MinWidth="{Binding MinWidth}"
+		MaxWidth="{Binding MaxWidth}"
+		Width="{Binding Width}">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
