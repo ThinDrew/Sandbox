@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="RGR.Views.RequestManagerView">
+	<Grid ColumnDefinitions="Auto, *">
+		<Grid RowDefinitions="Auto, *">
+			<Button Margin="10" Content="Add Request"/>
+		</Grid>
+		<Grid Grid.Column="1" ColumnDefinitions="Auto" RowDefinitions="Auto, Auto, Auto">
+			<TextBlock Margin="0, 10, 0, 0" Text="Name"/>
+			<TextBox Grid.Row="1" Width="200"/>
+			<TextBlock Grid.Row="2" Text="SELECT"/>
+			<ItemsControl>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Grid RowDefinitions="Auto" ColumnDefinitions="*, Auto">
+							<TextBlock Text=""/>
+							<CheckBox/>
+						</Grid>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+	</Grid>
+</UserControl>
