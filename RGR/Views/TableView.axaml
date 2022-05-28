@@ -7,10 +7,10 @@
 
 	<Grid RowDefinitions="Auto, Auto, Auto, *">
 		<Menu>
-			<MenuItem Header="File"/>
 			<MenuItem Header="New Request" Command="{Binding $parent[Window].DataContext.Change}"/>
+			<MenuItem Header="Execute" Click="OnExButtonClick"/>
 		</Menu>
-		<TabControl Grid.Row="1" Items="{Binding Tables.Tables}" SelectionChanged="OnSelect" >
+		<TabControl x:Name="TCont" Grid.Row="1" Items="{Binding Tables.Tables}" SelectionChanged="OnSelect" >
 			<TabControl.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding TableName}" />

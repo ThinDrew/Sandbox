@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
@@ -31,16 +32,23 @@ namespace RGR.ViewModels
         {
             if (CurrentView is TableViewModel)
             {
-                CurrentView = new RequestManagerViewModel();
+                var vm = new RequestManagerViewModel(mainView.Tables, mainView.Requests);
+                Observable.Merge(vm.Send).Take(1).Subscribe(msg =>
+                {
+                    if (msg != null)
+                    {
+                        mainView.Requests = msg;
+                    }
+                    CurrentView = mainView;
+                });
+                CurrentView = vm;
                 Width = 600;
                 MinWidth = 600;
-                MaxWidth = 600;
             }
             else if (currentView is RequestManagerViewModel) {
                 CurrentView = new TableViewModel();
                 Width = 800;
                 MinWidth = 450;
-                MaxWidth = 800;
             } 
         }
 

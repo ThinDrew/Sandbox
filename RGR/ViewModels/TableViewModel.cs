@@ -7,6 +7,7 @@ using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using RGR.Models;
+using System.Reactive;
 
 namespace RGR.ViewModels
 {
@@ -15,10 +16,17 @@ namespace RGR.ViewModels
         string dbName = "DogRunners.db";
         private SQLiteConnection sql_con;
         private DataSet tables;
+
+        List<RequestData> requests;
         int selectRow;
 
         public int currentTableIndex;
 
+        public List<RequestData> Requests
+        {
+            get => requests;
+            set => this.RaiseAndSetIfChanged(ref requests, value);
+        }
         public int SelectRow
         {
             get => selectRow;
@@ -31,8 +39,13 @@ namespace RGR.ViewModels
             private set => this.RaiseAndSetIfChanged(ref tables, value);
         }
 
+        public ReactiveCommand<Unit, DataSet> SendTables { get; }
+
         public TableViewModel()
         {
+
+            SendTables = ReactiveCommand.Create(() => Tables);
+
             string sql = "SELECT name FROM sqlite_master WHERE type=\"table\" ORDER BY 1";
             string connectionStr = "Data Source=" + dbName + ";Mode=ReadWrite";
 
@@ -113,6 +126,25 @@ namespace RGR.ViewModels
                 tables.AcceptChanges();
             }
         }
+
+        public void Execute ()
+        {
+            string connectionStr = "Data Source=" + dbName + ";Mode=ReadWrite";
+            using (sql_con = new SQLiteConnection(connectionStr))
+            {
+                sql_con.Open();
+                SQLiteCommand command;
+                for (int i = 0; i < Requests.Count; i++)
+                {
+                    command = new SQLiteCommand(Requests[i].Text, sql_con);
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                    adapter.FillSchema(Tables, SchemaType.Source);
+                    adapter.Fill(tables, Requests[i].Name);
+                }
+                
+            }
+        }
+
         ~TableViewModel()
         {
             sql_con.Close();

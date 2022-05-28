@@ -85,6 +85,19 @@ namespace RGR.Views
             ChangeTable(context.Tables.Tables[context.currentTableIndex]);
         }
 
+        public void OnExButtonClick(object sender, RoutedEventArgs args)
+        {
+            var context = DataContext as TableViewModel;
+            context.Execute();
+            
+            TCont.Items = context.Tables.Tables;
+            
+            
+            
+            
+            /*ChangeTable(context.Tables.Tables[context.currentTableIndex]);*/
+        }
+        
         //private void InitializeComponent()
         //{
         //    AvaloniaXamlLoader.Load(this);
